@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="FunnelFUTURIALS: captación y cualificación de pacientes de alto valor para coaches y terapeutas, sin fricción técnica.">
+<meta property="og:title" content="FunnelFUTURIALS">
+<meta property="og:description" content="Tu vórtice de ventas. Sin fricción técnica.">
+<meta property="og:url" content="https://funnel.futurials.com/">
+<meta name="theme-color" content="#0B0A09">
+<title>FunnelFUTURIALS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Layout: pantallas completas que se recorren de a una (rueda, swipe, teclado); el dot naranja es el hilo conductor */
+:root{
+  --bg:#F6F1EE; --bg-2:#F0EBE7; --bg-3:#FAF6F3;
+  --ink:#1A1A1A; --ink-2:#6B6560; --ink-3:#8A8480;
+  --rule:#E0DBD7; --orange:#F08000;
+  --night:#0B0A09; --night-ink:#F6F1EE; --night-2:#8A8480;
+  --display:"Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --body:"DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --gx:clamp(24px,5.2vw,96px);
+  --ease:cubic-bezier(.22,1,.36,1);
+  color-scheme:light;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink)}
+body{font-family:var(--body);font-weight:500;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+*{box-sizing:border-box}
+
+/* ---------- marca ---------- */
+.wm{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.4em;margin-right:-.4em;white-space:nowrap;line-height:1}
+.chrome .wm sup{font-size:55%;letter-spacing:0;vertical-align:super;line-height:0;margin-left:.1em;color:var(--orange)}
+.slogan{font-family:var(--display);font-style:italic;font-weight:400;color:var(--ink-2)}
+.slogan .ia{color:var(--orange)}
+
+/* ---------- cromo fijo ---------- */
+.chrome{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  padding-top:calc(env(safe-area-inset-top,0px) + clamp(18px,3vh,32px));
+  padding-left:max(var(--gx),env(safe-area-inset-left,0px));padding-right:max(var(--gx),env(safe-area-inset-right,0px));
+  pointer-events:none;color:var(--ink);transition:color .6s var(--ease),opacity .6s var(--ease)}
+.chrome .wm{font-size:clamp(17px,1.4vw,22px)}
+.chrome .count{font-size:12px;letter-spacing:.14em;color:var(--ink-3);font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:14px}
+.chrome .slot{width:10px;height:10px;display:inline-block}
+body.dark .chrome{color:var(--night-ink)}
+body.cover .chrome{opacity:0}
+
+#dot{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--orange);z-index:30;
+  pointer-events:none;will-change:transform}
+
+.rail{position:fixed;z-index:20;right:max(calc(var(--gx) - 2px),env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:12px}
+.rail button{all:unset;cursor:pointer;width:14px;height:14px;display:grid;place-items:center}
+.rail button::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink-3);opacity:.45;transition:all .4s var(--ease)}
+.rail button[aria-current="true"]::before{opacity:1;background:var(--ink);transform:scale(1.4)}
+body.dark .rail button::before{background:var(--night-ink)}
+.rail button:focus-visible{outline:1px solid var(--orange);outline-offset:3px;border-radius:50%}
+
+/* ---------- pantallas ---------- */
+.s{position:fixed;inset:0;visibility:hidden;overflow:hidden;
+  padding-top:calc(env(safe-area-inset-top,0px) + clamp(84px,13vh,140px));
+  padding-bottom:calc(env(safe-area-inset-bottom,0px) + clamp(48px,9vh,96px));
+  padding-left:max(var(--gx),env(safe-area-inset-left,0px));padding-right:max(calc(var(--gx) + 28px),env(safe-area-inset-right,0px))}
+.s.is-on{visibility:visible}
+.s.night{background:var(--night);color:var(--night-ink)}
+.s.light{background:var(--bg)}
+.s.tone{background:var(--bg-2)}
+
+.ln{display:block;overflow:hidden;padding:.12em .06em .3em;margin:-.12em -.06em -.3em}
+.ln>span{display:inline-block}
+.w{display:inline-block;white-space:nowrap}
+.ch{display:inline-block;will-change:transform}
+.wd{display:inline-block;will-change:transform,opacity}
+
+h1,h2{font-family:var(--display);font-weight:500;margin:0;letter-spacing:-.012em;line-height:.98;text-wrap:balance}
+h2{font-size:clamp(46px,7.2vw,128px)}
+h2 em{font-style:italic;font-weight:500}
+.or{color:var(--orange)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3)}
+.lede{font-size:clamp(17px,1.45vw,23px);line-height:1.5;color:var(--ink-2);max-width:34ch;font-weight:400}
+.lede b{color:var(--ink);font-weight:600}
+.lede b.or,.hero .foot p b.or{color:var(--orange)}
+.rule{height:1px;background:var(--rule);transform-origin:left center}
+
+/* portada / cierre */
+.s.night{display:grid;place-items:center;text-align:center}
+.mark{display:grid;justify-items:center;gap:clamp(18px,3vh,30px)}
+.mark .wm{font-size:clamp(24px,5vw,80px);color:var(--night-ink)}
+.mark .slogan{font-size:clamp(19px,2vw,30px);color:var(--night-2)}
+.mark .wm{margin-right:-.4em}
+.cue{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 40px);transform:translateX(-50%);
+  width:1px;height:46px;background:linear-gradient(var(--night-2),transparent);overflow:hidden}
+.cue::after{content:"";position:absolute;inset:0;background:var(--night-ink);animation:drip 2.4s var(--ease) infinite}
+@keyframes drip{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+.contact{display:flex;gap:clamp(18px,3vw,48px);justify-content:center;flex-wrap:wrap;margin-top:clamp(26px,5vh,56px);font-size:15px;letter-spacing:.04em}
+.contact a,.contact span{color:var(--night-2);text-decoration:none;transition:color .3s;user-select:all}
+.contact a:hover,.contact a:focus-visible{color:var(--orange);outline:none}
+
+/* composiciones de escritorio */
+.grid{height:100%;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);align-content:stretch}
+.hero h2{grid-column:1/12;align-self:end}
+.hero .foot{grid-column:1/13;align-self:end;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:inherit;gap:20px 0;margin-top:clamp(28px,5vh,56px)}
+.hero .foot .rule{grid-column:1/13}
+.hero .foot p{grid-column:1/8;margin:0;font-size:clamp(17px,1.5vw,24px);color:var(--ink-2);font-weight:400}
+.hero .foot p b{color:var(--ink);font-weight:600}
+.hero .foot .tag{grid-column:9/13;justify-self:end;align-self:center}
+
+.split h2{grid-column:1/9;align-self:start}
+.split .lede{grid-column:8/12;align-self:end;justify-self:start}
+.split.rev h2{grid-column:1/10;align-self:end;order:2}
+.split.rev .lede{grid-column:1/6;align-self:start;order:1}
+.split .num{font-family:var(--display);font-style:italic;font-size:clamp(18px,1.6vw,24px);color:var(--ink-3);display:block;margin-bottom:18px}
+
+.how{grid-column:8/12;align-self:end;display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.how .arr{width:46px;height:1px;background:var(--ink);position:relative}
+.how .arr::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);transform:rotate(-45deg)}
+
+/* ecosistema */
+.eco{height:100%;display:flex;flex-direction:column;gap:clamp(22px,4vh,44px)}
+.eco header{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);align-items:end}
+.eco header h2{grid-column:1/8;font-size:clamp(42px,5.4vw,96px)}
+.eco header .lede{grid-column:8/12;max-width:38ch}
+.track{position:relative;flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(18px,2.4vw,40px);align-content:center}
+.track .line{position:absolute;left:0;right:0;top:calc(50% - var(--lift,120px));height:1px;background:var(--rule)}
+.track .line i{position:absolute;inset:0;background:var(--ink);transform-origin:left top}
+.step{position:relative;padding-top:34px;min-width:0}
+.step .node{position:absolute;left:0;top:-6px;width:12px;height:12px;border-radius:50%;border:1px solid var(--ink-3);background:var(--bg-2)}
+.step .n{font-family:var(--display);font-style:italic;font-size:clamp(20px,1.7vw,28px);color:var(--ink-3);display:block}
+.step h3{font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin:10px 0 14px;color:var(--ink)}
+.step p{margin:0;font-size:clamp(14px,1.02vw,16px);line-height:1.6;color:var(--ink-2);font-weight:400;max-width:30ch}
+.step p b{color:var(--ink);font-weight:600}
+.step.lit .n{color:var(--ink)}
+.step .node{transition:background .4s,border-color .4s,transform .4s}
+.step.pass .node{background:var(--ink);border-color:var(--ink);transform:scale(.6)}
+.step.home .node{border-color:var(--orange);transform:scale(2)}
+
+/* ---------- árbol mobile (#mob): composición propia, no un desktop achicado ---------- */
+.deck[hidden]{display:none!important}
+body.is-mob{--gx:22px}
+body.is-mob .rail{display:none}
+body.is-mob .chrome .wm{font-size:15px}
+body.is-mob .chrome .count{gap:12px}
+#mob .s{padding-top:calc(env(safe-area-inset-top,0px) + 96px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 44px);
+  padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+#mob h2{font-size:clamp(42px,12.6vw,62px);line-height:1}
+#mob .col{height:100%;display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+#mob .col.end{justify-content:flex-end}
+#mob .lede{font-size:clamp(17px,4.8vw,20px);max-width:none}
+#mob .foot{display:flex;flex-direction:column;gap:16px}
+#mob .foot p{margin:0;font-size:clamp(17px,4.8vw,20px);line-height:1.45;color:var(--ink-2);font-weight:400}
+#mob .foot p b{color:var(--ink);font-weight:600}
+#mob .foot p b.or{color:var(--orange)}
+#mob .how{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+#mob .how .arr{width:1px;height:38px;background:var(--ink);position:relative}
+#mob .how .arr::after{content:"";position:absolute;left:-3px;bottom:0;width:7px;height:7px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);transform:rotate(45deg)}
+#mob .mark .wm{font-size:clamp(22px,7vw,34px)}
+#mob .mark .slogan{font-size:clamp(18px,5.2vw,22px)}
+#mob .contact{flex-direction:column;gap:12px}
+/* ecosistema mobile: índice vertical, el dot baja y se queda en 04 */
+#mob .eco{gap:30px}
+#mob .track.v{flex:0 0 auto;display:grid;grid-template-columns:1fr;row-gap:26px;align-content:start;padding-left:34px}
+#mob .track.v .step{padding-top:0}
+#mob .track.v .step .node{left:-34px;top:.5em}
+#mob .track.v .step .n{display:inline;font-size:22px;margin-right:12px}
+#mob .track.v .step h3{display:inline;font-size:12px}
+/* un paso por pantalla */
+#mob .mini{position:relative;display:flex;justify-content:space-between;width:100%;max-width:240px}
+#mob .mini::before{content:"";position:absolute;left:6px;right:6px;top:50%;height:1px;background:var(--rule)}
+#mob .mini i{position:relative;width:12px;height:12px;border-radius:50%;border:1px solid var(--ink-3);background:var(--bg-2);transition:all .4s}
+#mob .mini i.pass{background:var(--ink);border-color:var(--ink);transform:scale(.6)}
+#mob .mini i.home{border-color:var(--orange);transform:scale(2)}
+#mob .big{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(96px,32vw,150px);line-height:.9;color:var(--orange);display:block}
+#mob .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:600;display:block;margin:6px 0 14px}
+#mob .stepbody{display:flex;flex-direction:column}
+@media (max-height:640px){ #mob h2{font-size:40px} #mob .big{font-size:88px} #mob .lede,#mob .foot p{font-size:16px} }
+@media (prefers-reduced-motion:reduce){ .cue::after{animation:none} }
+</style>
+
+<style>html,body{margin:0}</style>
+</head>
+<body>
+<div class="chrome" aria-hidden="true">
+  <span class="wm">Futurials<sup>®</sup></span>
+  <span class="count"><span id="cur">01</span>&nbsp;/&nbsp;<span id="tot">08</span><span class="slot" id="dotSlot"></span></span>
+</div>
+<div id="dot" aria-hidden="true"></div>
+<nav class="rail" id="rail" aria-label="Pantallas"></nav>
+
+<main class="deck" id="desk">
+
+<!-- 01 · portada -->
+<section class="s night" data-dark data-cover aria-label="Portada">
+  <div class="mark">
+    <span class="ln"><span class="wm">Futurials®</span></span>
+    <span class="ln"><span class="slogan">Inteligenc<span class="ia">ia</span> de negocio. Sin artificios.</span></span>
+  </div>
+  <div class="cue" aria-hidden="true"></div>
+</section>
+
+<!-- 02 · presentación -->
+<section class="s light" aria-label="Tu vórtice de ventas">
+  <div class="grid hero">
+    <h2>
+      <span class="ln"><span>Tu <em class="or">vórtice</em> de ventas</span></span>
+      <span class="ln"><span>Sin <em class="or">fricción</em> técnica</span></span>
+    </h2>
+    <div class="foot">
+      <div class="rule"></div>
+      <p class="rv">Presentamos <b class="or">FunnelFUTURIALS</b> para coaches y terapeutas.</p>
+      <span class="eyebrow tag rv">Coaches · Terapeutas</span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · la distancia -->
+<section class="s light" aria-label="La distancia">
+  <div class="grid split">
+    <h2>
+      <span class="ln"><span>La distancia</span></span>
+      <span class="ln"><span>entre tu <em class="or">vocación</em></span></span>
+      <span class="ln"><span>y tus <span class="or">pacientes</span></span></span>
+    </h2>
+    <p class="lede rv">Dominar las herramientas tecnológicas <b>fragmenta tu enfoque</b> y te aleja de tu zona de genialidad: <b>transformar la vida de las personas.</b></p>
+  </div>
+</section>
+
+<!-- 04 · el obstáculo -->
+<section class="s tone" aria-label="El obstáculo operativo">
+  <div class="grid split rev">
+    <p class="lede rv">Sabemos que tu foco está en transformar la vida de tus pacientes y/o clientes. Configurar herramientas técnicas, <b>solo detiene tu crecimiento.</b></p>
+    <h2>
+      <span class="ln"><span>El <span class="or">obstáculo</span></span></span>
+      <span class="ln"><span><em>operativo</em></span></span>
+    </h2>
+  </div>
+</section>
+
+<!-- 05 · la solución -->
+<section class="s light" aria-label="La solución delegada">
+  <div class="grid split">
+    <h2>
+      <span class="ln"><span>La solución</span></span>
+      <span class="ln"><span><em class="or">delegada</em></span></span>
+    </h2>
+    <p class="lede rv"><b class="or">FunnelFUTURIALS</b> es un sistema cerrado que automatiza la captación y cualificación de clientes de alto valor. <b>Nosotros diseñamos, integramos y alojamos todo por ti.</b></p>
+    <div class="how rv"><span>Así funciona</span><span class="arr"></span></div>
+  </div>
+</section>
+
+<!-- 06 · ecosistema -->
+<section class="s tone" data-eco aria-label="El ecosistema en acción">
+  <div class="eco">
+    <header>
+      <h2><span class="ln"><span>El <span class="or">ecosistema</span></span></span><span class="ln"><span><em>en acción</em></span></span></h2>
+      <p class="lede rv">Un recorrido automatizado y sin fricciones: desde un visitante desconocido hasta un paciente de alto valor en tu agenda.</p>
+    </header>
+    <div class="track">
+      <div class="line"><i></i></div>
+      <article class="step"><span class="node"></span><span class="n">01</span><h3>Captación nativa</h3>
+        <p>Desplegamos una página de aterrizaje optimizada. Redactamos el encabezado principal y configuramos un formulario integrado que <b>evita redirecciones innecesarias.</b></p></article>
+      <article class="step"><span class="node"></span><span class="n">02</span><h3>Cualificación</h3>
+        <p>Alojamos tu video persuasivo sin publicidad externa. Integramos un calendario propio que <b>filtra a los prospectos</b> mediante preguntas clave antes de reservar espacio en tu agenda.</p></article>
+      <article class="step"><span class="node"></span><span class="n">03</span><h3>Preparación</h3>
+        <p>Generamos y enviamos la guía pre sesión en PDF de forma inmediata tras el registro. Gestionamos los recordatorios por correo para <b>asegurar la asistencia</b> a tu sesión de claridad.</p></article>
+      <article class="step"><span class="node"></span><span class="n">04</span><h3>Conversión</h3>
+        <p>Sesión con un prospecto educado, pre-cualificado y <b>listo para invertir.</b></p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · resultado -->
+<section class="s light" aria-label="Tu calendario lleno">
+  <div class="grid hero">
+    <h2>
+      <span class="ln"><span>Tu <em class="or">calendario</em> lleno</span></span>
+      <span class="ln"><span>Tu <span class="or">mente <em>enfocada</em></span></span></span>
+    </h2>
+    <div class="foot">
+      <div class="rule"></div>
+      <p class="rv">Te entregamos un ecosistema digital que <b>pre cualifica a tus prospectos</b> antes de que lleguen a la llamada de Zoom.</p>
+      <span class="eyebrow tag rv">Operatividad técnica cero para ti, resultados directos en tu agenda</span>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · cierre -->
+<section class="s night" data-dark aria-label="Contacto">
+  <div class="mark">
+    <span class="ln"><span class="wm">Futurials®</span></span>
+    <span class="ln"><span class="slogan">Inteligenc<span class="ia">ia</span> de negocio. Sin artificios.</span></span>
+    <div class="contact rv">
+      <a href="https://futurials.com" target="_blank" rel="noopener">futurials.com</a>
+      <a href="mailto:hola@futurials.com">hola@futurials.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<main class="deck" id="mob" hidden>
+
+<section class="s night" data-dark data-cover aria-label="Portada">
+  <div class="mark">
+    <span class="ln"><span class="wm">Futurials®</span></span>
+    <span class="ln"><span class="slogan">Inteligenc<span class="ia">ia</span> de negocio.</span></span>
+    <span class="ln"><span class="slogan">Sin artificios.</span></span>
+  </div>
+  <div class="cue" aria-hidden="true"></div>
+</section>
+
+<section class="s light" aria-label="Tu vórtice de ventas">
+  <div class="col">
+    <span class="eyebrow rv">Coaches · Terapeutas</span>
+    <h2>
+      <span class="ln"><span>Tu <em class="or">vórtice</em></span></span>
+      <span class="ln"><span>de ventas</span></span>
+      <span class="ln"><span>Sin <em class="or">fricción</em></span></span>
+      <span class="ln"><span>técnica</span></span>
+    </h2>
+    <div class="foot"><div class="rule"></div><p class="rv">Presentamos <b class="or">FunnelFUTURIALS</b> para coaches y terapeutas.</p></div>
+  </div>
+</section>
+
+<section class="s light" aria-label="La distancia">
+  <div class="col">
+    <h2>
+      <span class="ln"><span>La distancia</span></span>
+      <span class="ln"><span>entre tu</span></span>
+      <span class="ln"><span><em class="or">vocación</em></span></span>
+      <span class="ln"><span>y tus <span class="or">pacientes</span></span></span>
+    </h2>
+    <p class="lede rv">Dominar las herramientas tecnológicas <b>fragmenta tu enfoque</b> y te aleja de tu zona de genialidad: <b>transformar la vida de las personas.</b></p>
+  </div>
+</section>
+
+<section class="s tone" aria-label="El obstáculo operativo">
+  <div class="col">
+    <p class="lede rv">Sabemos que tu foco está en transformar la vida de tus pacientes y/o clientes. Configurar herramientas técnicas, <b>solo detiene tu crecimiento.</b></p>
+    <h2>
+      <span class="ln"><span>El</span></span>
+      <span class="ln"><span><span class="or">obstáculo</span></span></span>
+      <span class="ln"><span><em>operativo</em></span></span>
+    </h2>
+  </div>
+</section>
+
+<section class="s light" aria-label="La solución delegada">
+  <div class="col">
+    <h2>
+      <span class="ln"><span>La solución</span></span>
+      <span class="ln"><span><em class="or">delegada</em></span></span>
+    </h2>
+    <p class="lede rv"><b class="or">FunnelFUTURIALS</b> es un sistema cerrado que automatiza la captación y cualificación de clientes de alto valor. <b>Nosotros diseñamos, integramos y alojamos todo por ti.</b></p>
+    <div class="how rv"><span class="arr"></span><span>Así funciona</span></div>
+  </div>
+</section>
+
+<section class="s tone" data-eco aria-label="El ecosistema en acción">
+  <div class="col eco">
+    <h2><span class="ln"><span>El <span class="or">ecosistema</span></span></span><span class="ln"><span><em>en acción</em></span></span></h2>
+    <p class="lede rv">Un recorrido automatizado y sin fricciones: desde un visitante desconocido hasta un paciente de alto valor en tu agenda.</p>
+    <div class="track v"><div class="line"><i></i></div><article class="step"><span class="node"></span><span class="n">01</span><h3>Captación nativa</h3></article><article class="step"><span class="node"></span><span class="n">02</span><h3>Cualificación</h3></article><article class="step"><span class="node"></span><span class="n">03</span><h3>Preparación</h3></article><article class="step"><span class="node"></span><span class="n">04</span><h3>Conversión</h3></article></div>
+  </div>
+</section>
+
+<section class="s tone" data-stepn="0" aria-label="Paso 01: Captación nativa">
+  <div class="col">
+    <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="stepbody">
+      <span class="ln"><span class="big">01</span></span>
+      <span class="kicker rv">Captación nativa</span>
+      <p class="lede rv">Desplegamos una página de aterrizaje optimizada. Redactamos el encabezado principal y configuramos un formulario integrado que <b>evita redirecciones innecesarias.</b></p>
+    </div>
+  </div>
+</section>
+<section class="s tone" data-stepn="1" aria-label="Paso 02: Cualificación">
+  <div class="col">
+    <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="stepbody">
+      <span class="ln"><span class="big">02</span></span>
+      <span class="kicker rv">Cualificación</span>
+      <p class="lede rv">Alojamos tu video persuasivo sin publicidad externa. Integramos un calendario propio que <b>filtra a los prospectos</b> mediante preguntas clave antes de reservar espacio en tu agenda.</p>
+    </div>
+  </div>
+</section>
+<section class="s tone" data-stepn="2" aria-label="Paso 03: Preparación">
+  <div class="col">
+    <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="stepbody">
+      <span class="ln"><span class="big">03</span></span>
+      <span class="kicker rv">Preparación</span>
+      <p class="lede rv">Generamos y enviamos la guía pre sesión en PDF de forma inmediata tras el registro. Gestionamos los recordatorios por correo para <b>asegurar la asistencia</b> a tu sesión de claridad.</p>
+    </div>
+  </div>
+</section>
+<section class="s tone" data-stepn="3" aria-label="Paso 04: Conversión">
+  <div class="col">
+    <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="stepbody">
+      <span class="ln"><span class="big">04</span></span>
+      <span class="kicker rv">Conversión</span>
+      <p class="lede rv">Sesión con un prospecto educado, pre-cualificado y <b>listo para invertir.</b></p>
+    </div>
+  </div>
+</section>
+
+<section class="s light" aria-label="Tu calendario lleno">
+  <div class="col">
+    <h2>
+      <span class="ln"><span>Tu <em class="or">calendario</em></span></span>
+      <span class="ln"><span>lleno</span></span>
+      <span class="ln"><span>Tu <span class="or">mente</span></span></span>
+      <span class="ln"><span><em class="or">enfocada</em></span></span>
+    </h2>
+    <div class="foot">
+      <div class="rule"></div>
+      <p class="rv">Te entregamos un ecosistema digital que <b>pre cualifica a tus prospectos</b> antes de que lleguen a la llamada de Zoom.</p>
+      <span class="eyebrow rv">Operatividad técnica cero para ti, resultados directos en tu agenda</span>
+    </div>
+  </div>
+</section>
+
+<section class="s night" data-dark aria-label="Contacto">
+  <div class="mark">
+    <span class="ln"><span class="wm">Futurials®</span></span>
+    <span class="ln"><span class="slogan">Inteligenc<span class="ia">ia</span> de negocio.</span></span>
+    <span class="ln"><span class="slogan">Sin artificios.</span></span>
+    <div class="contact rv">
+      <a href="https://futurials.com" target="_blank" rel="noopener">futurials.com</a>
+      <a href="mailto:hola@futurials.com">hola@futurials.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Observer.min.js"></script>
+<script>
+(function(){
+  const isMob=matchMedia('(max-width:760px)').matches || (matchMedia('(pointer:coarse)').matches && Math.min(innerWidth,innerHeight)<=600);
+  const deck=document.getElementById(isMob?'mob':'desk');
+  document.getElementById(isMob?'desk':'mob').remove();
+  deck.hidden=false; document.body.classList.toggle('is-mob',isMob);
+  const S=[...deck.querySelectorAll('.s')], N=S.length;
+  document.getElementById('tot').textContent=String(N).padStart(2,'0');
+  const dot=document.getElementById('dot'), slot=document.getElementById('dotSlot');
+  const rail=document.getElementById('rail'), curEl=document.getElementById('cur');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile=()=>innerWidth<=760;
+  const INK='#1A1A1A', OR='#F08000';
+  let cur=-1, busy=false, ecoTl=null;
+
+  /* ---- partir títulos en letras y párrafos en palabras, respetando <em>, <b> y .or ---- */
+  function split(root,mode){
+    [...root.childNodes].forEach(n=>{
+      if(n.nodeType===3){
+        const frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(t=>{
+          if(!t) return;
+          if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(' '));return;}
+          if(mode==='w'){const w=document.createElement('span');w.className='wd';w.textContent=t;frag.appendChild(w);return;}
+          const w=document.createElement('span');w.className='w';
+          [...t].forEach(c=>{const ch=document.createElement('span');ch.className='ch';ch.textContent=c;w.appendChild(ch);});
+          frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if(n.nodeType===1 && !n.classList.contains('wm')) split(n,mode);
+    });
+  }
+  document.querySelectorAll('.s h2 .ln>span, .slogan, .big').forEach(e=>split(e,'c'));
+  document.querySelectorAll('.lede.rv, .foot p.rv, .step p').forEach(e=>split(e,'w'));
+  document.querySelectorAll('.mark .wm').forEach(e=>{const t=e.textContent;e.textContent='';[...t].forEach(c=>{const ch=document.createElement('span');ch.className='ch';ch.textContent=c;e.appendChild(ch);});});
+
+  S.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Pantalla '+(i+1));b.onclick=()=>go(i);rail.appendChild(b);});
+  const btns=[...rail.children];
+
+  const center=el=>{const r=el.getBoundingClientRect();return {x:r.left+r.width/2-5,y:r.top+r.height/2-5};};
+
+  /* ---- entrada de una pantalla ---- */
+  function enter(s,at){
+    const tl=gsap.timeline({delay:at||0});
+    const chars=s.querySelectorAll('.ln .ch'), words=s.querySelectorAll('.rv .wd, .rv.how, .rv.tag, .rv.kicker, .rv.eyebrow, .contact'), rules=s.querySelectorAll('.rule');
+    const orCh=s.querySelectorAll('h2 .or .ch'), orW=s.querySelectorAll('.rv .or .wd');
+    tl.fromTo(chars,{yPercent:118,rotate:7,opacity:1},{yPercent:0,rotate:0,duration:1.15,ease:'expo.out',stagger:{each:.016}},0);
+    if(orCh.length) tl.fromTo(orCh,{color:INK},{color:OR,duration:.6,ease:'power2.out',stagger:.035},'>-0.55');
+    if(rules.length) tl.fromTo(rules,{scaleX:0},{scaleX:1,duration:1.3,ease:'expo.inOut'},.2);
+    if(words.length) tl.fromTo(words,{opacity:.08,y:10,filter:'blur(4px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.7,ease:'power2.out',stagger:.022},.55);
+    if(orW.length) tl.fromTo(orW,{color:INK},{color:OR,duration:.6},'>-0.2');
+    return tl;
+  }
+  function leave(s,dir){
+    const tl=gsap.timeline();
+    tl.to(s.querySelectorAll('.ln .ch'),{yPercent:-118*dir,duration:.55,ease:'expo.in',stagger:{each:.006,from:dir>0?'start':'end'}},0)
+      .to(s.querySelectorAll('.rv,.step,.rule,.contact'),{opacity:0,y:-18*dir,duration:.45,ease:'power2.in'},0);
+    return tl;
+  }
+  function reset(s){
+    gsap.set(s.querySelectorAll('.ch,.wd,.rv,.step,.step>*:not(.node),.rule,.contact,.line i'),{clearProps:'all'});
+    s.querySelectorAll('.step').forEach(x=>x.classList.remove('lit','pass','home'));
+  }
+
+  /* ---- ecosistema: el dot de la marca recorre la línea y se queda en el cuarto paso ---- */
+  function layoutLine(s){
+    const steps=[...s.querySelectorAll('.step')], nodes=steps.map(x=>x.querySelector('.node'));
+    const track=s.querySelector('.track'), box=s.querySelector('.line'), m=track.classList.contains('v');
+    gsap.set(steps,{clearProps:'transform'});
+    const tr=track.getBoundingClientRect(), a=nodes[0].getBoundingClientRect(), z=nodes[3].getBoundingClientRect();
+    Object.assign(box.style,{left:(a.left+a.width/2-tr.left)+'px',top:(a.top+a.height/2-tr.top)+'px',right:'auto',bottom:'auto',
+      width:m?'1px':(z.left-a.left)+'px',height:m?(z.top-a.top)+'px':'1px'});
+    return {steps,nodes,pts:nodes.map(center),m};
+  }
+  function eco(s){
+    const {steps,nodes,pts,m}=layoutLine(s), line=s.querySelector('.line i');
+    const bodies=steps.map(x=>[...x.children].filter(c=>!c.classList.contains('node')));
+    gsap.set(bodies.flat(),{opacity:0,y:16});
+    gsap.set(line,m?{scaleY:0,scaleX:1}:{scaleX:0,scaleY:1});
+    const tl=gsap.timeline({delay:.5});
+    tl.to(dot,{x:pts[0].x,y:pts[0].y,scale:1,duration:1,ease:'expo.inOut'});
+    steps.forEach((st,i)=>{
+      if(i>0){
+        tl.add(()=>steps[i-1].classList.add('pass'),'+=0.25')
+          .to(dot,{x:pts[i].x,y:pts[i].y,duration:.9,ease:'power2.inOut'})
+          .to(line,Object.assign(m?{scaleY:i/3}:{scaleX:i/3},{duration:.9,ease:'power2.inOut'}),'<');
+      }
+      tl.add(()=>st.classList.add('lit'),'<0.55')
+        .to(bodies[i],{opacity:1,y:0,duration:.7,ease:'power3.out',stagger:.08},'<')
+        .fromTo(st.querySelectorAll('.wd'),{opacity:.1},{opacity:1,duration:.5,stagger:.012},'<0.1');
+    });
+    // llegada: el dot late, crece y se asienta como el cuarto punto
+    tl.to(dot,{scale:2.4,duration:.45,ease:'power2.out'},'>-0.2')
+      .add(()=>steps[3].classList.add('home'))
+      .to(dot,{scale:1.2,duration:.9,ease:'elastic.out(1,.45)'});
+    return tl;
+  }
+
+  /* ---- dónde vive el dot ---- */
+  function placeDot(s,instant){
+    gsap.killTweensOf(dot);
+    if(s.hasAttribute('data-eco')){
+      if(instant){const {steps,pts}=layoutLine(s);steps.forEach((x,i)=>x.classList.add('lit',i<3?'pass':'home'));gsap.set(s.querySelector('.line i'),{scaleX:1,scaleY:1});gsap.set(dot,{x:pts[3].x,y:pts[3].y,scale:1.2});}
+      else ecoTl=eco(s);
+      return;
+    }
+    if(s.hasAttribute('data-stepn')){
+      const k=+s.dataset.stepn, ms=[...s.querySelectorAll('.mini i')];
+      ms.forEach((x,i)=>{x.classList.toggle('pass',i<k);x.classList.remove('home');});
+      const c=center(ms[k]);
+      if(k===3 && !instant){
+        gsap.timeline({delay:.35}).to(dot,{x:c.x,y:c.y,scale:1,duration:1.1,ease:'expo.inOut'})
+          .to(dot,{scale:2.4,duration:.4,ease:'power2.out'}).add(()=>ms[3].classList.add('home'))
+          .to(dot,{scale:1.2,duration:.9,ease:'elastic.out(1,.45)'});
+      } else { if(k===3) ms[3].classList.add('home'); gsap.to(dot,{x:c.x,y:c.y,scale:1,duration:instant?0:1.1,ease:'expo.inOut'}); }
+      return;
+    }
+    const sls=s.querySelectorAll('.mark .slogan'), sl=sls[sls.length-1];
+    if(sl){const r=sl.getBoundingClientRect();
+      gsap.to(dot,{x:r.left+r.width/2-5,y:r.bottom+Math.max(28,innerHeight*.05),scale:1,duration:instant?0:1.2,ease:'expo.inOut'});return;}
+    const c=center(slot);
+    gsap.to(dot,{x:c.x,y:c.y,scale:1,duration:instant?0:1.2,ease:'expo.inOut'});
+  }
+
+  function chrome(n){
+    document.body.classList.toggle('dark',S[n].hasAttribute('data-dark'));
+    document.body.classList.toggle('cover',S[n].hasAttribute('data-cover'));
+    btns.forEach((b,i)=>b.setAttribute('aria-current',i===n));
+    curEl.textContent=String(n+1).padStart(2,'0');
+  }
+
+  function go(n){
+    n=Math.max(0,Math.min(N-1,n));
+    if(n===cur||busy) return;
+    const prev=S[cur], next=S[n], dir=n>cur?1:-1;
+    busy=true;
+    if(ecoTl){ecoTl.kill();ecoTl=null;}
+    next.classList.add('is-on'); chrome(n);
+    if(reduce){ if(prev){prev.classList.remove('is-on');} reset(next); placeDot(next,true); cur=n; busy=false; return; }
+    gsap.set(next,{zIndex:2}); if(prev) gsap.set(prev,{zIndex:1});
+    gsap.set(next.querySelectorAll('.ln .ch'),{yPercent:118});
+    gsap.set(next.querySelectorAll('.rv .wd,.rv.how,.rv.tag,.rv.kicker,.rv.eyebrow,.contact'),{opacity:0});
+    const tl=gsap.timeline({onComplete:()=>{busy=false;}});
+    if(prev) tl.add(leave(prev,dir),0);
+    tl.fromTo(next,{clipPath:dir>0?'inset(100% 0 0 0)':'inset(0 0 100% 0)'},{clipPath:'inset(0% 0 0 0)',duration:1,ease:'expo.inOut'},prev?.2:0);
+    if(prev) tl.add(()=>{prev.classList.remove('is-on');reset(prev);gsap.set(prev,{clearProps:'clipPath'});},'>');
+    tl.add(enter(next),prev?.6:0);
+    placeDot(next,false);
+    cur=n;
+  }
+
+  /* ---- parallax sutil en escritorio ---- */
+  if(!reduce && matchMedia('(pointer:fine)').matches){
+    addEventListener('pointermove',e=>{
+      const h=S[cur]&&S[cur].querySelector('h2, .mark'); if(!h) return;
+      const dx=(e.clientX/innerWidth-.5), dy=(e.clientY/innerHeight-.5);
+      gsap.to(h,{x:dx*-14,y:dy*-10,duration:1.2,ease:'power3.out',overwrite:'auto'});
+    });
+  }
+
+  const mq=matchMedia('(max-width:760px)');
+  (mq.addEventListener?mq.addEventListener('change',()=>location.reload()):mq.addListener(()=>location.reload()));
+  addEventListener('resize',()=>{const s=S[cur]; if(!s) return; if(ecoTl){ecoTl.kill();ecoTl=null;} placeDot(s,true);});
+  addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
+    else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(N-1);}
+  });
+  Observer.create({target:window,type:'wheel,touch',wheelSpeed:-1,tolerance:12,preventDefault:true,onUp:()=>go(cur+1),onDown:()=>go(cur-1)});
+
+  /* ---- portada: el dot nace, crece y se aparta para que aparezca la marca ---- */
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
+    const s=S[0]; s.classList.add('is-on'); cur=0; chrome(0);
+    if(reduce){placeDot(s,true);return;}
+    busy=true;
+    const wm=s.querySelectorAll('.wm .ch'), sl=s.querySelectorAll('.slogan .ch'), r=s.querySelectorAll('.slogan')[s.querySelectorAll('.slogan').length-1].getBoundingClientRect();
+    gsap.set(dot,{x:innerWidth/2-5,y:innerHeight/2-5,scale:0});
+    gsap.set(wm,{opacity:0,y:30,filter:'blur(10px)'}); gsap.set(sl,{yPercent:118});
+    gsap.timeline({onComplete:()=>{busy=false;}})
+      .to(dot,{scale:1,duration:.8,ease:'expo.out'},.3)
+      .to(dot,{scale:5,duration:1,ease:'power2.inOut'})
+      .to(dot,{scale:1,x:r.left+r.width/2-5,y:r.bottom+Math.max(28,innerHeight*.05),duration:1.3,ease:'expo.inOut'})
+      .to(wm,{opacity:1,y:0,filter:'blur(0px)',duration:1.4,ease:'expo.out',stagger:{each:.07,from:'center'}},'<0.15')
+      .to(sl,{yPercent:0,duration:1.1,ease:'expo.out',stagger:.012},'<0.6')
+      .fromTo(s.querySelectorAll('.slogan .ia .ch'),{color:'#8A8480'},{color:OR,duration:.6},'>-0.3');
+  });
+})();
+</script>
+
+</body>
+</html>
